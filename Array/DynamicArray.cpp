@@ -24,6 +24,23 @@ int main()
         cout << p[i] << " ";
     cout << endl;
 
-    delete[] p;
+    // Increasing the size of dynamic Array
+    int *q;         // Declaration of pointer for new Array
+    q = new int[7]; // New Array declared in Heap
+    //Coping elements for orignal array to new array.
+    for (int i = 0; i < 5; i++)
+    {
+        q[i] = p[i];
+    }
+    delete[] p; // Deleted orignal array
+    p = q;      // pointer of orignal array points to new array
+    q = NULL;   //redundant pointer for an array
+    p[5] = 12;
+    p[6] = 14;
+    cout << "Elements of new Dynamic Arrays are: ";
+    for (int i = 0; i < 7; i++)
+        cout << p[i] << " ";
+    cout << endl;
+    delete[] p; // Delete the array in heap after use
     return 0;
 }
