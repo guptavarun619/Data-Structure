@@ -100,6 +100,24 @@ public:
             cout << "Index out of range" << endl;
         }
     }
+    // Search a particular element
+    // NOTE: Linear Search is performed we don't know if the array is sorted or not
+    void search(int key)
+    {
+        bool found = false;
+        for (int i = 0; i < length; i++)
+        {
+            if (A[i] == key)
+            {
+                found = true;
+                cout << key << " found at " << i + 1 << " position" << endl;
+                break;
+            }
+        }
+        if (!found)
+            cout << key << " not found in array" << endl;
+        ;
+    }
 };
 
 int main()
@@ -110,6 +128,8 @@ int main()
     arr.append(9);
     arr.display();
 
+    arr.search(8);
+
     // arr.insert(3, 8);
     // arr.display();
 
@@ -119,8 +139,8 @@ int main()
     // arr.replace(3, 4);
     // arr.display();
 
-    arr.remove(1);
-    arr.display();
+    // arr.remove(1);
+    // arr.display();
 
     return 0;
 }
