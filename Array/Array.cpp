@@ -9,6 +9,7 @@ private:
     int length;
 
 public:
+    // Array constructor to create a new array
     Array()
     {
         cout << "Enter the size of an array ";
@@ -16,6 +17,7 @@ public:
         A = new int[size];
         length = 0;
     }
+    // To display each element of an array
     void display()
     {
         if (length)
@@ -31,6 +33,7 @@ public:
             cout
                 << "You are only able to see (" << length << ") element(s) as other element(s) of array are uninitialized" << endl;
     }
+    // To add new element to array from end
     void append(int x)
     {
         if (length < size)
@@ -44,9 +47,10 @@ public:
             cout << "No more Element can be added to this Array" << endl;
         }
     }
+    // To add new element to array at particular index
     void insert(int index, int x)
     {
-        if (index < size && index > -1)
+        if (index < length + 1 && index > -1)
         {
             if (length < size)
             {
@@ -60,10 +64,11 @@ public:
             }
             else
             {
-                cout << "No more Element can be inserted to this Array" << endl;
+                cout << "No more Element can be inserted to this Array for now" << endl;
             }
         }
     }
+    // To replace the value of an element for specific index
     void replace(int index, int x)
     {
         if (index < size && index > -1)
@@ -72,6 +77,23 @@ public:
             cout << x << " has been replaced at " << index << " position" << endl;
             if (length <= index)
                 length = index + 1;
+        }
+        else
+        {
+            cout << "Index out of range" << endl;
+        }
+    }
+    // To delete an element for specific index
+    void remove(int index)
+    {
+        if (index < length && index > -1)
+        {
+            for (int i = index; i < length - 1; i++)
+            {
+                A[i] = A[i + 1];
+            }
+            cout << "Element at " << index << " has been deleted" << endl;
+            length--;
         }
         else
         {
@@ -88,14 +110,17 @@ int main()
     arr.append(9);
     arr.display();
 
-    arr.insert(4, 8);
-    arr.display();
+    // arr.insert(3, 8);
+    // arr.display();
 
     // arr.replace(0, 1);
     // arr.display();
 
     // arr.replace(3, 4);
     // arr.display();
+
+    arr.remove(1);
+    arr.display();
 
     return 0;
 }
