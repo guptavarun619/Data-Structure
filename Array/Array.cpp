@@ -110,13 +110,27 @@ public:
             if (A[i] == key)
             {
                 found = true;
-                cout << key << " found at " << i + 1 << " position" << endl;
+                cout << key << " found at " << i << " index" << endl;
                 break;
             }
         }
         if (!found)
             cout << key << " not found in array" << endl;
         ;
+    }
+    void get(int index)
+    {
+        if (index < length && index > -1)
+        {
+            cout << "Value at " << index << " is " << A[index] << endl;
+        }
+        else
+        {
+            if (index < size)
+                cout << "Index out of range for elements inserted till now" << endl;
+            else
+                cout << "Index out of range" << endl;
+        }
     }
 };
 
@@ -128,7 +142,8 @@ int main()
     arr.append(9);
     arr.display();
 
-    arr.search(8);
+    arr.get(3);
+    // arr.search(8);
 
     // arr.insert(3, 8);
     // arr.display();
