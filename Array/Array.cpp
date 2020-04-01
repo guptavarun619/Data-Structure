@@ -44,6 +44,26 @@ public:
             cout << "No more Element can be added to this Array" << endl;
         }
     }
+    void insert(int index, int x)
+    {
+        if (index < size && index > -1)
+        {
+            if (length < size)
+            {
+                for (int i = length; i > index; i--)
+                {
+                    A[length] = A[length - 1];
+                }
+                length++;
+                A[index] = x;
+                cout << x << " has been inserted at " << index << " position" << endl;
+            }
+            else
+            {
+                cout << "No more Element can be inserted to this Array" << endl;
+            }
+        }
+    }
     void replace(int index, int x)
     {
         if (index < size && index > -1)
@@ -52,6 +72,10 @@ public:
             cout << x << " has been replaced at " << index << " position" << endl;
             if (length <= index)
                 length = index + 1;
+        }
+        else
+        {
+            cout << "Index out of range" << endl;
         }
     }
 };
@@ -64,11 +88,14 @@ int main()
     arr.append(9);
     arr.display();
 
-    arr.replace(0, 1);
+    arr.insert(4, 8);
     arr.display();
 
-    arr.replace(3, 4);
-    arr.display();
+    // arr.replace(0, 1);
+    // arr.display();
+
+    // arr.replace(3, 4);
+    // arr.display();
 
     return 0;
 }
