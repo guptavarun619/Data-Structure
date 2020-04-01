@@ -44,12 +44,12 @@ public:
             cout << "No more Element can be added to this Array" << endl;
         }
     }
-    void insert(int index, int x)
+    void replace(int index, int x)
     {
         if (index < size && index > -1)
         {
             A[index] = x;
-            cout << x << " has been inserted at " << index << " position" << endl;
+            cout << x << " has been replaced at " << index << " position" << endl;
             if (length <= index)
                 length = index + 1;
         }
@@ -64,10 +64,10 @@ int main()
     arr.append(9);
     arr.display();
 
-    arr.insert(0, 1);
+    arr.replace(0, 1);
     arr.display();
 
-    arr.insert(3, 4);
+    arr.replace(3, 4);
     arr.display();
 
     return 0;
