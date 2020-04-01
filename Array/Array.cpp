@@ -1,41 +1,74 @@
-// Array is a collection of elements having similar datatype
-// stored at contigous memory location
 #include <iostream>
-#include <array>
-
 using namespace std;
+
+class Array
+{
+private:
+    int *A;
+    int size;
+    int length;
+
+public:
+    Array()
+    {
+        cout << "Enter the size of an array ";
+        cin >> size;
+        A = new int[size];
+        length = 0;
+    }
+    void display()
+    {
+        if (length)
+        {
+            cout << "Elements of Array are: ";
+            for (int i = 0; i < length; i++)
+            {
+                cout << A[i] << " ";
+            }
+            cout << endl;
+        }
+        if (length < size)
+            cout
+                << "You are only able to see (" << length << ") element(s) as other element(s) of array are uninitialized" << endl;
+    }
+    void append(int x)
+    {
+        if (length < size)
+        {
+            A[length] = x;
+            length++;
+            cout << x << " has been added to the Array" << endl;
+        }
+        else
+        {
+            cout << "No more Element can be added to this Array" << endl;
+        }
+    }
+    void insert(int index, int x)
+    {
+        if (index < size && index > -1)
+        {
+            A[index] = x;
+            cout << x << " has been inserted at " << index << " position" << endl;
+            if (length <= index)
+                length = index + 1;
+        }
+    }
+};
 
 int main()
 {
-    // int a[5]; // Declaration of an array without pre-assignment
-    int array[5] = {2, 5, 4, 7, 8}; // Declaration of an array with pre-assigning the values
+    Array arr;
+    arr.append(5);
+    arr.append(6);
+    arr.append(9);
+    arr.display();
 
-    // Accessing elements of an array using index
-    cout << "First Element of Array: " << array[0] << endl;
-    cout << "Second Element of Array: " << array[1] << endl;
+    arr.insert(0, 1);
+    arr.display();
 
-    // Accessing elements of an array using pointer
-    cout << "Third Element of Array: " << *(array + 2) << endl;
-    cout << "Fourth Element of Array: " << *(array + 3) << endl;
-
-    // Size of array
-    int size = sizeof(array) / sizeof(array[0]);
-    cout << "Size of the array is: " << size << endl;
-
-    // Traversal through an array
-    cout << "All element of the Array are: ";
-    for (int i = 0; i < size; i++)
-    {
-        cout << array[i] << " ";
-    }
-    cout << endl;
-
-    // To prove the array is stored in a contigous manner, here are the address of each element
-    cout << "Address of all element in Array are: " << endl;
-    for (int i = 0; i < size; i++)
-    {
-        cout << &array[i] << endl;
-    }
+    arr.insert(3, 4);
+    arr.display();
 
     return 0;
 }
