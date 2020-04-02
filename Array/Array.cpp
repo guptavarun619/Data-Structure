@@ -1,4 +1,4 @@
-#include <iostream>
+#include <bits/stdc++.h>
 using namespace std;
 
 class Array
@@ -118,6 +118,7 @@ public:
             cout << key << " not found in array" << endl;
         ;
     }
+    // Get value at particular index
     void get(int index)
     {
         if (index < length && index > -1)
@@ -132,6 +133,28 @@ public:
                 cout << "Index out of range" << endl;
         }
     }
+    // Gives the maximum element of all elements
+    void max()
+    {
+        int max = INT_MIN;
+        for (int i = 0; i < length; i++)
+        {
+            if (A[i] > max)
+                max = A[i];
+        }
+        cout << "Max element is: " << max << endl;
+    }
+    // Gives the maximum element of all elements
+    void min()
+    {
+        int min = INT_MAX;
+        for (int i = 0; i < length; i++)
+        {
+            if (A[i] < min)
+                min = A[i];
+        }
+        cout << "Min element is: " << min << endl;
+    }
 };
 
 int main()
@@ -139,10 +162,13 @@ int main()
     Array arr;
     arr.append(5);
     arr.append(6);
-    arr.append(9);
+    arr.append(-1);
     arr.display();
 
-    arr.get(3);
+    arr.max();
+    arr.min();
+
+    // arr.get(1);
     // arr.search(8);
 
     // arr.insert(3, 8);
