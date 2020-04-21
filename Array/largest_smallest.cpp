@@ -14,19 +14,17 @@ int main()
         cin >> a[i];
     }
 
-    int min = INT_MAX;
-    int max = INT_MIN;
+    int largest = INT_MAX;
+    int smallest = INT_MIN;
 
     for (int i = 0; i < n; i++)
     {
-        if (a[i] < min)
-            min = a[i];
-        if (a[i] > max)
-            max = a[i];
+        largest = max(largest, a[i]);
+        smallest = min(smallest, a[i]);
     }
 
-    cout << "The maximum valued element is : " << max << endl;
-    cout << "The minimum valued element is : " << min << endl;
+    cout << "The maximum valued element is : " << largest << endl;
+    cout << "The minimum valued element is : " << smallest << endl;
 
     return 0;
 }
