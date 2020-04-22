@@ -8,7 +8,7 @@ int main()
     int a[100];
     int maxSum = 0;
     int tempSum = 0;
-
+    int left_pos = -1, right_pos = -1;
     for (int i = 0; i < n; i++)
     {
         cin >> a[i];
@@ -26,10 +26,20 @@ int main()
                 tempSum += a[k];
             }
             // cout << endl;
-            maxSum = max(tempSum, maxSum);
+            if (maxSum < tempSum)
+            {
+                maxSum = tempSum;
+                left_pos = i;
+                right_pos = j;
+            }
             tempSum = 0;
         }
     }
-    cout << maxSum << endl;
+    cout << "The sub-array is : ";
+    for (int i = left_pos; i <= right_pos; i++)
+    {
+        cout << a[i] << " ";
+    } cout << endl;
+    cout << "Maximum sum is : " << maxSum << endl;
     return 0;
 }
