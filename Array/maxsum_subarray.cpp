@@ -15,7 +15,7 @@ int main()
     }
 
     // Generate All sub-array
-
+    // Simple bruteforce method to check sum for each sub-array
     for (int i = 0; i < n; i++)
     {
         for (int j = i; j < n; j++)
