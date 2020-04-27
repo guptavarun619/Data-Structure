@@ -19,7 +19,6 @@ int main()
         ptr = strtok(NULL," ");
         cout << ptr << endl;
     }
-    
 
     return 0;
 }
