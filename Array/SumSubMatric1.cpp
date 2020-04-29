@@ -27,9 +27,9 @@ int main()
     {
         for (int ty = 0; ty < col; ty++)
         {
-            for (int bx = tx + 1; bx < row; bx++)
+            for (int bx = tx; bx < row; bx++)
             {
-                for (int by = ty + 1; by < col; by++)
+                for (int by = ty; by < col; by++)
                 {
                     tempSum = 0;
                     for (int i = tx; i < bx + 1; i++)
