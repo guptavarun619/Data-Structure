@@ -27,5 +27,8 @@ int main()
     for (int i = 0; i < 5; i++)
         cout << b[i] << " ";
     cout << endl;
+
+    // Deallocating dynamic array
+    delete [] b;
     return 0;
 }

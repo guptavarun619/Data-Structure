@@ -3,6 +3,4 @@
 !*.*
 .vscode/
 
-/Array/input.txt
-/Array/Challenges-Arrays/input.txt
-/String/input.txt
+**/input.txt
