@@ -13,6 +13,7 @@ int main()
     // Search in any container
 
     int key = 3;
+    // Will search in linear fasion
     auto it = find(arr, arr+n, key);
     cout << "Address " << it << endl;
     cout << "Key " << *it << endl;
