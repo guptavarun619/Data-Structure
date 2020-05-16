@@ -20,24 +20,24 @@ int first_occurence(int a[], int n, int key)
         else if (a[mid] < key)
             s = mid + 1;
         else 
-            e = mid + 1;
+            e = mid - 1;
     }
     return ans;
 }
 
-int last_occurence(int arr[], int n, int key)
+int last_occurence(int a[], int n, int key)
 {
     int s = 0, e = n - 1;
     int ans = -1;
     while (s <= e)
     {
         int mid = (s+e) / 2;
-        if(arr[mid] == key)
+        if(a[mid] == key)
         {
             ans = mid;
             s = mid + 1;
         }
-        else if (arr[mid] < key)
+        else if (a[mid] < key)
             s = mid + 1;
         else
             e = mid - 1;
@@ -53,7 +53,7 @@ int main()
     int arr[] = {1, 2, 5, 8, 8, 8, 8, 8, 10, 12, 15, 20};
     int n = sizeof(arr) / sizeof(arr[0]);
 
-    int key = 8;
+    int key = 9;
 
     // First and Last occurence of of a key in sorted array
     cout << "First occurence : " << first_occurence(arr, n, key) << endl;
