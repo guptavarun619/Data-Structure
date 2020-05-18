@@ -1,6 +1,43 @@
 #include<iostream>
 using namespace std;
 
+float squareRoot(int a)
+{
+    int s = 0, e = a;
+    int mid;
+
+    float ans;
+    while (s <= e)
+    {
+        mid = (s + e) / 2;
+        if ((mid*mid) == a)
+        {
+            ans = mid;
+            break;
+        }
+        else if ((mid*mid) < a)
+        {
+            ans = mid;
+            s = mid + 1;
+        }   
+        else
+            e = mid - 1;
+    };
+
+    float inc = 0.1;
+    
+    for(int prec = 0; prec < 5; prec++)//loop for precision
+    {
+        while(ans*ans <= a)
+            ans += inc;
+        
+        ans -= inc;
+        inc /= 10;
+    }
+
+    return ans;
+}
+
 int main()
 {
     #ifndef ONLINE_JUDGE
@@ -9,29 +46,9 @@ int main()
 
     int a; 
     cin >> a;
-    cout << a << endl;
+    // cout << a << endl;
 
-    int s = 0, e = a;
-    int mid;
-
-    bool found = false;
-    while (s <= e)
-    {
-        mid = (s + e) / 2;
-        if ((mid*mid) == a)
-        {
-            found = true;
-            break;
-        }
-        else if ((mid*mid) < a)
-            s = mid + 1;
-        else
-            e = mid - 1;
-    };
-    if(found)
-        cout << mid << " is the square root of " << a << endl;
-    else
-        cout << "Not a perfect square" << endl;
+    cout << squareRoot(a);
     
     return 0;
 }
