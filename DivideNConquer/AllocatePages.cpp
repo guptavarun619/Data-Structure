@@ -1,6 +1,7 @@
 #include<iostream>
 using namespace std;
 // Allocate Pages of Books
+// For sorted # of pages
 bool allocate(int a[], int n, int k, int max)
 {
     int students = 1;
@@ -32,25 +33,17 @@ int main()
 
         int k;
         cin >> k;
-        
+
         int a[n];
         for (int i = 0; i < n; i++)
             cin >> a[i];
 
 
-        int s, e, mid;
-        if (a[0] < a[n-1])
-        {
-            s = a[n-1];
-            for (int i = 0; i < n - 2; i++)
-                e += a[i];
-        }
-        else
-        {
-            s = a[0];
-            for (int i = 1; i < n - 1; i++)
-                e += a[i];
-        }
+        int s, e = 0, mid;
+        s = a[n-1];
+        for (int i = 0; i < n; i++)
+            e += a[i];
+        
         int ans = -1;
         while(s <= e)
         {
