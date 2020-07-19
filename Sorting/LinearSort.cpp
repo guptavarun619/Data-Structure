@@ -9,17 +9,33 @@ int main()
     int n;
     cin >> n;
     int a[n];
-    map<int, int> m;
+    int s = 0, m = 0, e = n-1;
     for (int i = 0; i < n; i++)
-    {
         cin >> a[i];
-        m[a[i]]++;
-    }
 
-    for (auto i = m.begin(); i!=m.end(); i++)
+    while(m <= e)
     {
-        for (int j = 0; j < i->second; j++)
-            cout << i->first << endl;
+        if(a[m] == 0)
+        {
+            swap(a[m], a[s]);
+            m++;
+            s++;
+        }
+        else if(a[m] == 1)
+        {
+            m++;
+        }
+        else
+        {
+            swap(a[e], a[m]);
+            e--;
+        }
+        
+        for (int i = 0; i < n; i++)
+        {
+            cout << a[i] << endl;
+        }
+        
     }
 
     return 0;
