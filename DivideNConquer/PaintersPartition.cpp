@@ -1,6 +1,7 @@
 #include<iostream>
 #include<climits>
 #include<algorithm>
+#define int long long
 using namespace std;
 
 bool check(int a[], int n, int k, int time)
@@ -27,14 +28,17 @@ bool check(int a[], int n, int k, int time)
     
 }
 
-int main()
+int32_t main()
 {
     #ifndef ONLINE_JUDGE
         freopen("input.txt", "r", stdin);
     #endif
-    int k, n;
-    cin >> k >> n;
-    int a[n], mx = INT_MIN, sum = 0;
+    int n, k, t;
+    cin >> n >> k >> t;
+    // n => no of boards,
+    // k => no of painters,
+    // t => time taken to pain 1 unit of board by 1 painter 
+    int a[n], mx = LONG_MIN, sum = 0;
     for (int i = 0; i < n; i++)
     {
         cin >> a[i];
@@ -54,6 +58,6 @@ int main()
         else
             s = mid + 1;            
     }
-    cout << ans;
+    cout << (ans*t)%10000003;
     return 0;
 }
