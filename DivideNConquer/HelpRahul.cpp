@@ -6,13 +6,13 @@ int search(int a[], int n, int key)
     int s = 0, e = n - 1;
     while (s <= e)
     {
-        int mid = (s + e) / 2;
+        int mid = s + (e-s) / 2;
         if(a[mid] == key)
             return mid;
         else if (a[s] <= a[mid])
         {
             // 2 cases -> element lies on the left or the right of the mid
-            if (a[mid] > key)
+            if (key >= a[s] && key <= a[mid])
                 e = mid - 1;
             else
                 s = mid + 1;
@@ -20,7 +20,7 @@ int search(int a[], int n, int key)
         else
         {
             // 2 cases -> element lies on the left or the right of the mid
-            if(a[mid] < key)
+            if(a[mid] <= key && key <= a[e])
                 s = mid + 1;
             else
                 e = mid - 1; 
