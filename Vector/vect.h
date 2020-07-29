@@ -1,20 +1,23 @@
+template<typename T>
+
 class Vector {
-    int *arr, current_size, max_size;
+    T *arr; 
+    int current_size, max_size;
 
     public:
         Vector()
         {
             current_size = 0;
             max_size = 1;
-            arr = new int[max_size];
+            arr = new T[max_size];
         }
-        void push_back(int d){
+        void push_back(T d){
             if(current_size == max_size)
             {
                 // Array is fully occupied
-                int *oldArr = arr;
+                T *oldArr = arr;
                 max_size *= 2;
-                arr = new int[max_size];
+                arr = new T[max_size];
                 // Copy from old array
                 for (int i = 0; i < current_size; i++)
                     arr[i] = oldArr[i];
@@ -29,12 +32,12 @@ class Vector {
             current_size--;
         }
 
-        int front() const
+        T front() const
         {
             return arr[0];
         }
         
-        int back() const
+        T back() const
         {
             return arr[current_size-1];
         }
@@ -49,7 +52,7 @@ class Vector {
             return max_size;
         }
 
-        int at(const int i)
+        T at(const int i)
         {
             return arr[i];
         }
@@ -59,7 +62,7 @@ class Vector {
         }
 
         // operating overlaoding
-        int operator[](const int i)
+        T operator[](const int i)
         {
             return arr[i];
         }
