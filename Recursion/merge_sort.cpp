@@ -46,9 +46,9 @@ void merge_sort(int a[], int s, int e)
 
 int main()
 {
-    #ifndef ONLINE_JUDGE
-        freopen("input.txt", "r", stdin);
-    #endif
+    // #ifndef ONLINE_JUDGE
+    //     freopen("input.txt", "r", stdin);
+    // #endif
     int n;
     cin >> n;
     int a[n];

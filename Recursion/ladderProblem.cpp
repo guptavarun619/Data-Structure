@@ -7,13 +7,11 @@ int ladder(int n, int k)
         return 1;
     if(n < 0)
         return 0;
-
+ 
     int tmp = 0;
 
     for(int i = 1; i <= k; i++)
-    {
-            tmp += ladder(n-i, k);
-    }
+        tmp += ladder(n-i, k);
 
     return tmp;
 }
