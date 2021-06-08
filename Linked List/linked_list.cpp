@@ -73,6 +73,21 @@ void deleteFromMiddle(Node* &head, int pos) {
     delete temp;
 }
 
+void deleteTail(Node* head) {
+    if(head == NULL) {
+        return;
+    }
+
+    Node* prev = head;
+    head = head->next;
+    while(head->next != NULL) {
+        head = head->next;
+        prev = prev->next;
+    }
+    delete head;
+    prev->next = NULL;
+}
+
 // here copy of head is passed by value
 void print(Node *head) {
     while(head != NULL) {
@@ -106,6 +121,9 @@ int32_t main() {
     print(head);
 
     deleteFromMiddle(head, 0);
+    print(head);
+
+    deleteTail(head);
     print(head);
 
     return 0;
