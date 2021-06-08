@@ -56,18 +56,20 @@ void deleteHead(Node* &head) {
     // delete temp;
 }
 
-void deleteFromMiddle(Node* head, int pos) {
+void deleteFromMiddle(Node* &head, int pos) {
     if(head == NULL) {
         return;
     }
     if(pos == 0) {
         deleteHead(head);
+        return;
     }
-    while(head->next != NULL && --pos) {
-        head = head->next;
+    Node *itr = head;
+    while(itr->next != NULL && --pos) {
+        itr = itr->next;
     }
-    Node *temp = head->next;
-    head->next = temp->next;
+    Node *temp = itr->next;
+    itr->next = temp->next;
     delete temp;
 }
 
@@ -103,6 +105,8 @@ int32_t main() {
     deleteFromMiddle(head, 2);
     print(head);
 
+    deleteFromMiddle(head, 0);
+    print(head);
 
     return 0;
 }
