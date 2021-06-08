@@ -88,6 +88,32 @@ void deleteTail(Node* head) {
     prev->next = NULL;
 }
 
+int search(Node *head, int k) {
+    if(head == NULL) {
+        return -1; 
+    }
+    int p = 0;
+    while(head != NULL) {
+        if(head->data == k) {
+            return p;
+        }
+        p++;
+        head = head->next;
+    }
+    return -1;
+}
+
+// Recursive implementation
+int searchRec(Node *head, int k, int p) {
+    if(head == NULL) {
+        return -1; // 0 is returned as 1 is deducted from the result for the index
+    }
+    if(head->data == k) {
+        return p;
+    }
+    return searchRec(head->next, k, ++p);
+}
+
 // here copy of head is passed by value
 void print(Node *head) {
     while(head != NULL) {
@@ -125,6 +151,25 @@ int32_t main() {
 
     deleteTail(head);
     print(head);
+
+    int a = 5;
+    int found = search(head, a);
+    if(found == -1) {
+        cout << "Element " << a << " was not found in the linked list provided";
+    }
+    else {
+        cout << "Element " << a << " found at " << found << " position.";
+    }
+    cout << endl;
+
+    int foundRec = searchRec(head, a, 0);
+    if(foundRec == -1) {
+        cout << "Element " << a << " was not found in the linked list provided";
+    }
+    else {
+        cout << "Element " << a << " found at " << foundRec << " position.";
+    }
+    cout << endl;
 
     return 0;
 }
