@@ -22,7 +22,9 @@ void insert(Node *&head, int d) {
     head = n;
 }
 
-Node* midPoint(Node *temp1,Node *temp2, bool isEven) {
+Node* midPoint(Node *head, bool isEven) {
+    Node* temp1 = head;
+    Node* temp2 = head;
     while(temp2->next != NULL) {
         temp2 = temp2->next;
         if(isEven) {
@@ -31,6 +33,23 @@ Node* midPoint(Node *temp1,Node *temp2, bool isEven) {
         isEven = !isEven;
     }
     return temp1;
+}
+
+Node* kthNodeFromLast(Node *head, int k) {
+    Node* fast_ptr = head;
+    Node* slow_ptr = head;
+    // setting fast pointer to kth element of the list
+    while(--k) {
+        if (fast_ptr->next == NULL) {
+            return NULL;
+        }
+        fast_ptr = fast_ptr->next;
+    }
+    while(fast_ptr->next != NULL) {
+        fast_ptr = fast_ptr->next;
+        slow_ptr = slow_ptr->next;
+    }
+    return slow_ptr;
 }
 
 void print(Node *head) {
@@ -56,9 +75,14 @@ int32_t main() {
 
     print(head);
 
-    Node *mid = midPoint(head, head, false);
+    Node *mid = midPoint(head, false);
     cout << mid->data << endl;
 
+    Node *kth = kthNodeFromLast(head, 6);
+    if(kth != NULL)
+        cout << kth->data << endl;
+    else 
+        cout << "The list is shorter than the input provided" << endl;
 
     return 0;
 }
