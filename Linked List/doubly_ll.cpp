@@ -54,6 +54,22 @@ void insertMiddle(Node* &head, int d, int pos) {
     temp->next->prev = temp;
 }
 
+void deletePos(Node* &head, int pos) {
+    Node *ptr = head;
+    while(pos > 1 && ptr->next != NULL) {
+        ptr = ptr->next;
+        pos--;
+    }
+    if(ptr->next == NULL) {
+        cout << "Please enter valid position, within the size of linked list";
+        return;
+    }
+    // ptr->next is to be deleted here
+    ptr->prev->next = ptr->next;
+    ptr->next->prev = ptr->prev;
+    delete ptr;
+}
+
 void print(Node *head) {
     if(head == NULL) {
         return;
@@ -76,7 +92,10 @@ int32_t main() {
     insertTail(head, 5);
     print(head);
 
-    insertMiddle(head, 6, 4);
+    insertMiddle(head, 6, 3);
+    print(head);
+
+    deletePos(head, 3);
     print(head);
 
     return 0;
