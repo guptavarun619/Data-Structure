@@ -18,7 +18,6 @@ void insert(Node* &head, int d) {
         return;
     }
     Node *temp = new Node(d);
-    temp->next = head;
     Node *itr = head;
     
     while(itr->next != head) {
@@ -27,6 +26,37 @@ void insert(Node* &head, int d) {
     itr->next = temp;
     temp->next = head;
     head = temp;
+}
+
+void deletePos(Node* &head, int pos) {
+    Node* itr = head;
+    if(pos == 1) {
+        Node *temp = head;
+        head = head->next;
+        while(itr->next != temp) {
+            itr = itr->next;
+        }
+        itr->next = head;
+        delete temp;
+        return;        
+    }
+    while(itr->next != NULL && pos > 2) {
+        itr = itr->next;
+        pos--;
+    }
+    // last element of the linked list is to be deleted
+    if(itr->next != NULL && itr->next->next == head) {
+        Node *temp = itr->next;
+        itr->next = head;
+        delete temp;
+        return;
+    }
+    // some middle element of the linked list is to be deleted
+    if(itr->next != NULL && pos == 2) {
+        Node *temp = itr->next;
+        itr->next = temp->next;
+        delete temp;
+    }
 }
 
 void print(Node *head) {
@@ -50,6 +80,9 @@ int32_t main() {
     insert(head, 3);
     insert(head, 2);
     insert(head, 1);
+    print(head);
+    
+    deletePos(head, 3);
     print(head);
     return 0;
 }
