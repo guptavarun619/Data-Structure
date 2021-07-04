@@ -57,6 +57,65 @@ void levelorderTraversal(Node *root) {
     }
 }
 
+void preorderIterativeTraversal(Node *root) {
+    if(root == nullptr) return;
+    stack<Node*> stack;
+    stack.push(root);
+    while(!stack.empty()) {
+        Node *temp = stack.top();
+        stack.pop();
+        cout << temp->val << " ";
+        if(temp->right != nullptr) {
+            stack.push(temp->right);
+        }
+        if(temp->left != nullptr) {
+            stack.push(temp->left);
+        } 
+    }
+}
+
+void inorderIterativeTraversal(Node *root) {
+    if (root == nullptr) return;
+    stack<Node*> stack;
+    // stack.push(root);
+    Node *temp = root;
+    // stack.push(temp);
+    while(!stack.empty() || temp) {
+        if(temp) {
+            stack.push(temp);
+            temp = temp->left;
+        }
+        else {
+            temp = stack.top();
+            stack.pop();
+            cout << temp->val << " ";
+            temp = temp->right;
+        }
+    }
+}
+
+void postorderIterativeTraversal(Node *root) {
+    if(root == nullptr) return;
+    stack<Node*> stack,outStack;
+
+    stack.push(root);
+    while(!stack.empty()) {
+        Node *temp = stack.top();
+        stack.pop();
+        outStack.push(temp);
+        if(temp->left != nullptr) {
+            stack.push(temp->left);
+        }
+        if(temp->right != nullptr) {
+            stack.push(temp->right);
+        }
+    }
+    while(!outStack.empty()) {
+        cout << outStack.top() << " ";
+        outStack.pop();
+    }
+}
+
 Node* preorderBuildTree() {
     int inputVal;
     cin >> inputVal;
@@ -106,6 +165,54 @@ Node* levelorderBuildTree() {
     }
 
     return temp;
+}
+
+vector<vector<int>> zigZagTraversal(Node *root) {
+    vector<vector<int>> ans;
+    if(root == nullptr) return ans;
+
+    queue<Node*> queue;
+    queue.push(root);
+    bool isEven = false;
+    while(!queue.empty()) {
+        int size = queue.size();
+        vector<int> level(size);
+        for(int i = 0; i < size; ++i) {
+            auto curr = queue.front();
+            queue.pop();
+            if(isEven) {
+                level[i] = curr->val; 
+            }
+            else {
+                level[size - i -1] = curr->val;
+            }
+
+            if(curr->left != nullptr) queue.push(curr->left);
+            if(curr->right != nullptr) queue.push(curr->right);
+        }
+        isEven = !isEven;
+        ans.push_back(level);
+    }
+    return ans;
+}
+
+int treeHeight(Node *root) {
+    if(root == nullptr) return 0;
+
+    int leftHeight = treeHeight(root->left);
+    int rightHeight = treeHeight(root->right);
+    return (max(leftHeight, rightHeight)) + 1;
+}
+
+int treeDiameter(Node *root) {
+    if(root == nullptr) return 0;
+    int leftHeight = treeHeight(root->left);
+    int rightHeight = treeHeight(root->right);
+    int a = leftHeight + rightHeight;
+    int b = treeDiameter(root->left);
+    int c = treeDiameter(root->right);
+    
+    return (max({a, b, c}));
 }
 
 struct NodeTag {
@@ -264,12 +371,22 @@ int32_t main() {
     // preorderTraversal(tree2);
 
     Node *tree2 = levelorderBuildTree();
-    inorderTraversal(tree2);
+    inorderIterativeTraversal(tree2);
     cout << endl;
     // leftView(tree2);
     // rightView(tree2);
     // topView(tree2);
-    bottomView(tree2);
+    // bottomView(tree2);
+
+    vector<vector<int>> zigZag = zigZagTraversal(tree2);
+    for(auto level : zigZag) {
+        for(auto element : level) {
+            cout << element << " ";
+        }
+        cout << endl;
+    }
+    // cout << treeHeight(tree2);
+    // cout << treeDiameter(tree2);
 
     return 0;
 }
