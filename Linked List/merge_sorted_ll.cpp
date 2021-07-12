@@ -57,6 +57,35 @@ Node* mergeSortedLinkedLists(Node *a, Node *b) {
     return c;
 }
 
+Node* mergeSortedLinkedListsIterative(Node *a, Node *b) {
+    if(a == nullptr) return b;
+    if(b == nullptr) return a;
+    Node *head, *temp;
+    if(a->data <= b->data) {
+        head = a;
+        a = a->next;
+    }
+    else {
+        head = b;
+        b = b->next;
+    }
+    temp = head;
+    while(a != nullptr || b != nullptr) {
+        if(a->data <= b->data) {
+            temp->next = a;
+            a = a->next;
+        }
+        else {
+            temp->next = b;
+            b = b->next;
+        }
+        temp = temp->next;
+    }
+    if(a == nullptr) temp->next = b;
+    else temp->next = a;
+    return head;
+}
+
 void print(Node *head) {
     while(head != NULL) {
         cout << head->data << " ";
@@ -83,7 +112,8 @@ int32_t main() {
     print(head2);
 
     Node* newList = NULL;
-    newList = mergeSortedLinkedLists(head1, head2);
+    // newList = mergeSortedLinkedLists(head1, head2);
+    newList = mergeSortedLinkedListsIterative(head1, head2);
     print(newList);
 
     return 0;
