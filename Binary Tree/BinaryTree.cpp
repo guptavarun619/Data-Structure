@@ -77,9 +77,7 @@ void preorderIterativeTraversal(Node *root) {
 void inorderIterativeTraversal(Node *root) {
     if (root == nullptr) return;
     stack<Node*> stack;
-    // stack.push(root);
     Node *temp = root;
-    // stack.push(temp);
     while(!stack.empty() || temp) {
         if(temp) {
             stack.push(temp);
@@ -167,6 +165,45 @@ Node* levelorderBuildTree() {
     return temp;
 }
 
+void childNodesAtDistanceK(Node* target,int k, vector<int> &ans) {
+    if(target == nullptr) return;
+    if(k == 0) {
+        ans.push_back(target->val);
+        return;
+    }
+    childNodesAtDistanceK(target->left, k-1, ans);
+    childNodesAtDistanceK(target->right, k-1, ans);
+}
+
+int otherNodesAtDistanceK(Node* root, Node* target, int k, vector<int> &ans) {
+    if(root == nullptr) return -1;
+    if(root == target) return 1;
+    
+    int left = otherNodesAtDistanceK(root->left, target, k, ans);
+    int right = otherNodesAtDistanceK(root->right, target, k, ans);
+    if(left != -1) {
+        if(left == k) ans.push_back(root->val);
+        if(left < k) childNodesAtDistanceK(root->right, k-left-1, ans);
+    }
+        
+    if(right != -1) {
+        if(right == k) ans.push_back(root->val);
+        if(right < k) childNodesAtDistanceK(root->left, k-right-1, ans);
+    }
+        
+    if(left == -1 && right == -1) return -1;
+    return max(right,left) + 1;
+}
+
+vector<int> distanceK(Node* root, Node* target, int k) {
+    vector<int> ans;
+    //for all nodes that can be children to target node
+    childNodesAtDistanceK(target, k, ans);
+    //for all nodes of other branch and above
+    otherNodesAtDistanceK(root, target, k, ans);
+    return ans;
+}
+
 vector<vector<int>> zigZagTraversal(Node *root) {
     vector<vector<int>> ans;
     if(root == nullptr) return ans;
@@ -230,18 +267,19 @@ void leftView(Node* root) {
 
     map<int, int> mp;
     while(!nodeQueue.empty()) {
-        auto [node, tag] = nodeQueue.front();
+        // auto [node, tag] = nodeQueue.front();
+        NodeTag curr = nodeQueue.front();
         nodeQueue.pop();
-        if(mp.find(tag) == mp.end()) {
-            mp[tag] = node->val;
+        if(mp.find(curr.tag) == mp.end()) {
+            mp[curr.tag] = curr.node->val;
         }
         // left 
-        if(node->left != nullptr) {
-            nodeQueue.emplace(node->left, tag + 1);
+        if(curr.node->left != nullptr) {
+            nodeQueue.emplace(curr.node->left, curr.tag + 1);
         }
         // right
-        if(node->right != nullptr) {
-            nodeQueue.emplace(node->right, tag +1);
+        if(curr.node->right != nullptr) {
+            nodeQueue.emplace(curr.node->right, curr.tag +1);
         }
     }
     // print the left view
@@ -261,14 +299,15 @@ void rightView(Node *root) {
     nodeQueue.emplace(root, 0);
     map<int, int> mp;
     while(!nodeQueue.empty()) {
-        auto [node, tag] = nodeQueue.front();
+        // auto [node, tag] = nodeQueue.front();
+        NodeTag curr = nodeQueue.front();
         nodeQueue.pop();
-        mp[tag] = node->val;
-        if(node->left != nullptr) {
-            nodeQueue.emplace(node->left, tag + 1);
+        mp[curr.tag] = curr.node->val;
+        if(curr.node->left != nullptr) {
+            nodeQueue.emplace(curr.node->left, curr.tag + 1);
         }
-        if(node->right != nullptr) {
-            nodeQueue.emplace(node->right, tag + 1);
+        if(curr.node->right != nullptr) {
+            nodeQueue.emplace(curr.node->right, curr.tag + 1);
         }
     }
 
@@ -289,16 +328,17 @@ void topView(Node *root) {
     nodeQueue.emplace(root, 0);
     map<int, int> mp;
     while(!nodeQueue.empty()) {
-        auto [node, tag] = nodeQueue.front();
+        // auto [node, tag] = nodeQueue.front();
+        NodeTag curr = nodeQueue.front();
         nodeQueue.pop();
-        if(mp.find(tag) == mp.end()) {
-            mp[tag] = node->val;
+        if(mp.find(curr.tag) == mp.end()) {
+            mp[curr.tag] = curr.node->val;
         }
-        if(node->left != nullptr) {
-            nodeQueue.emplace(node->left, tag - 1);
+        if(curr.node->left != nullptr) {
+            nodeQueue.emplace(curr.node->left, curr.tag - 1);
         }
-        if(node->right != nullptr) {
-            nodeQueue.emplace(node->right, tag + 1);
+        if(curr.node->right != nullptr) {
+            nodeQueue.emplace(curr.node->right, curr.tag + 1);
         }
     }
 
@@ -378,13 +418,13 @@ int32_t main() {
     // topView(tree2);
     // bottomView(tree2);
 
-    vector<vector<int>> zigZag = zigZagTraversal(tree2);
-    for(auto level : zigZag) {
-        for(auto element : level) {
-            cout << element << " ";
-        }
-        cout << endl;
-    }
+    // vector<vector<int>> zigZag = zigZagTraversal(tree2);
+    // for(auto level : zigZag) {
+    //     for(auto element : level) {
+    //         cout << element << " ";
+    //     }
+    //     cout << endl;
+    // }
     // cout << treeHeight(tree2);
     // cout << treeDiameter(tree2);
 
